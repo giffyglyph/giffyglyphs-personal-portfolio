@@ -1,0 +1,11 @@
+// Site colors.
+
+:root {
+    @include primary-colors(#b52929);
+    @include secondary-colors(#2960b5);
+    @include brand-colors();
+
+    --color-highlight: #FFC107;
+    --color-highlight-light: #FFECB3;
+    --color-highlight-dark: #FFA000;
+}

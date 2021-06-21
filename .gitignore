@@ -1,0 +1,4 @@
+/dist
+/node_modules
+/src/server/github_token.php
+/src/server/github_username.php
