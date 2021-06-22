@@ -22,17 +22,6 @@
 			gtag('config', 'UA-74105917-2');
 
 			$(document).ready(function() {
-				$('a[href^="#"]').on('click', function(event) {
-					var target = $(this.getAttribute('href'));
-					if (target.length) {
-						event.preventDefault();
-						$('html, body').stop().animate({
-							scrollTop: target.offset().top
-						}, 500);
-					}
-					$(this).blur();
-				});
-
 				fetch(
 					"server/github.php",
 					{
@@ -83,7 +72,14 @@
 						<div class="project"><span class="project__title">${x.name.replace("[PENDING] ", "")}</span> <span class="project__description">${x.body}</span></div>
 					`)
 					$("[data-projects='active']").html(activeProjects.join(''));
-					$("[data-projects='pending']").html(pendingProjects.join(''));
+					$("[data-projects='pending']").html(`
+						${pendingProjects.join('')}
+						<div class="project__actions">
+							<ul class="actions__primary">
+								<li><a href="https://patreon.com/giffyglyph" class="button"><i class="fab fa-fw fa-patreon"></i> Suggest other Projects</a></li>
+							</ul>
+						</div>
+					`);
 
 				})
 				.catch((error) => {
@@ -95,37 +91,23 @@
 	<body>
 		<div class="page page--index">
 			<nav class="page__navigation">
-				<a href="." class="navigation__brand"><img src="./images/icon-giffyglyph.png" alt="Giffyglyph"/> Giffyglyph</a>
-				<ul class="navigation__contact">
-					<li>
-						<a href="https://ko-fi.com/giffyglyph"><i class="fas fa-fw fa-heart"></i><span>Ko-fi</span></a>
-					</li>
-					<li>
-						<a href="https://reddit.com/user/giffyglyph"><i class="fab fa-fw fa-reddit-alien"></i><span>Reddit</span></a>
-					</li>
-					<li>
-						<a href="https://twitch.tv/giffyglyph"><i class="fab fa-fw fa-twitch"></i><span>Twitch</span></a>
-					</li>
-					<li>
-						<a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg"><i class="fab fa-fw fa-youtube"></i><span>Youtube</span></a>
-					</li>
-					<li>
-						<a href="https://www.facebook.com/giffyglyph"><i class="fab fa-fw fa-facebook"></i><span>Facebook</span></a>
-					</li>
-					<li>
-						<a href="https://twitter.com/giffyglyph"><i class="fab fa-fw fa-twitter"></i><span>Twitter</span></a>
-					</li>
-					<li>
-						<a href="mailto:giffyglyph@gmail.com"><i class="fas fa-fw fa-envelope"></i><span>Email</span></a>
-					</li>
-					<li>
-						<a href="https://patreon.com/giffyglyph" class="patreon">Support on Patreon</a>
-					</li>
-				</ul>
+				<div class="navigation__bar">
+					<a href="." class="navigation__brand"><img src="./images/icon-giffyglyph.png" alt="Giffyglyph"/> Giffyglyph</a>
+					<ul class="navigation__contact">
+						<li><a href="https://ko-fi.com/giffyglyph"><i class="fas fa-fw fa-heart"></i><span>Ko-fi</span></a></li>
+						<li><a href="https://reddit.com/user/giffyglyph"><i class="fab fa-fw fa-reddit-alien"></i><span>Reddit</span></a></li>
+						<li><a href="https://twitch.tv/giffyglyph"><i class="fab fa-fw fa-twitch"></i><span>Twitch</span></a></li>
+						<li><a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg"><i class="fab fa-fw fa-youtube"></i><span>Youtube</span></a></li>
+						<li><a href="https://www.facebook.com/giffyglyph"><i class="fab fa-fw fa-facebook"></i><span>Facebook</span></a></li>
+						<li><a href="https://twitter.com/giffyglyph"><i class="fab fa-fw fa-twitter"></i><span>Twitter</span></a></li>
+						<li><a href="mailto:giffyglyph@gmail.com"><i class="fas fa-fw fa-envelope"></i><span>Email</span></a></li>
+						<li><a href="https://patreon.com/giffyglyph" class="patreon">Support on Patreon</a></li>
+					</ul>
+				</div>
 			</nav>
 			<header class="page__header">
 				<h1 class="header__title"><a href=".">Giffyglyph</a></h1>
-				<div class="header__subtitle">Artificer, Dungeon Master, and Spoony Bard</div>
+				<div class="header__subtitle"><span>Writer</span><span>Coder</span><span>Artificer</span><span>Dungeon Master</span></div>
 				<div class="header__logo">
 					<img src="./images/icon-giffyglyph.png" alt="Giffyglyph"/>
 				</div>
@@ -135,10 +117,10 @@
 					<div class="well">
 						<h2>Hi, I'm Giffyglyph</h2>
 						<p><strong>I write rules. I build tools. I play games.</strong></p>
-						<p>Here you'll find a <a href="#section-releases">collection of my work</a> and <a href="#section-development">other things I have in the pipeline</a>. If you have any questions or feedback, please contact me via <a href="mailto:giffyglyph@gmail.com">email</a>, <a href="https://twitter.com/giffyglyph">Twitter</a>, <a href="https://facebook.com/giffyglyph">Facebook</a>, or <a href="https://reddit.com/user/giffyglyph">Reddit</a>. You can also find my weekly Q&A streams on <a href="https://twitch.tv/giffyglyph">Twitch</a> and <a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg">YouTube</a>.</p>
+						<p>Here you'll find a <a href="#releases">collection of my work</a> and <a href="#activity">other things I have in the pipeline</a>. If you have any questions or feedback, please contact me via <a href="mailto:giffyglyph@gmail.com">email</a>, <a href="https://twitter.com/giffyglyph">Twitter</a>, <a href="https://facebook.com/giffyglyph">Facebook</a>, or <a href="https://reddit.com/user/giffyglyph">Reddit</a>. You can also find my weekly Q&A streams on <a href="https://twitch.tv/giffyglyph">Twitch</a> and <a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg">YouTube</a>.</p>
 						<div class="button-stack">
-							<a href="#section-releases" class="button"><i class="fas fa-fw fa-book"></i> All Released Material</a>
-							<a href="#section-development" class="button"><i class="fas fa-fw fa-question"></i> What am I working on?</a>
+							<a href="#releases" class="button"><i class="fas fa-fw fa-book"></i> All Released Material</a>
+							<a href="#activity" class="button"><i class="fas fa-fw fa-question"></i> What am I working on?</a>
 							<a href="https://www.patreon.com/giffyglyph" class="button"><i class="fab fa-fw fa-patreon"></i> Become a Patron</a>
 							<a href="https://github.com/giffyglyph" class="button"><i class="fab fa-fw fa-github"></i> See my Source Code</a>
 						</div>
@@ -149,648 +131,60 @@
 						<a height=550 class="twitter-timeline" href="https://twitter.com/giffyglyph?ref_src=twsrc%5Etfw" data-chrome="nofooter transparent">Tweets by giffyglyph</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 					</div>
 				</section>
-				<div class="divider divider--alt">
-					<h3 class="divider__title" id="section-development">Activity</h3>
+				<div class="divider divider--alt" id="activity">
+					<h3 class="divider__title">Activity</h3>
 				</div>
-				<section class="section section--development">
+				<section class="section section--activity">
 					<h4>Current Projects</h4>
-					<div class="projects projects--active" data-projects="active">
+					<div class="activity__current">
+						<div class="projects projects--active" data-projects="active"></div>
 					</div>
 					<h4>Pending Projects</h4>
-					<div class="pending-projects">
-						<div class="products__icon">
+					<div class="activity__pending">
+						<div class="projects__icon">
 							<img src="./images/project-pending.png" class="icon" alt="Pending Projects">
 						</div>
 						<div class="projects projects--pending" data-projects="pending"></div>
-						<div class="project__actions">
-							<ul class="actions__primary">
-								<li><a href="https://patreon.com/giffyglyph" class="button"><i class="fab fa-fw fa-patreon"></i> Suggest other Projects</a></li>
-							</ul>
-						</div>
 					</div>
 				</section>
-				<div class="divider">
-					<h3 class="divider__title" id="section-releases">Releases</h3>
+				<div class="divider" id="releases">
+					<h3 class="divider__title">Releases</h3>
 					<ul class="shortcuts">
-						<li><a href="#products-compendiums">Compendiums</a></li>
-						<li><a href="#products-applications">Applications</a></li>
-						<li><a href="#products-classes">Classes</a></li>
+						<li><a href="#compendiums">Compendiums</a></li>
+						<li><a href="#applications">Applications</a></li>
+						<li><a href="#classes">Classes</a></li>
 					</ul>
 				</div>
 				<section class="section section--products">
-					<h4 id="products-compendiums">Compendiums</h4>
-					<div class="products">
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-darker-dungeons.jpg" alt="Giffyglyph's Darker Dungeons">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-giffyglyphs-darker-dungeons">Giffyglyph's Darker Dungeons</h5>
-								<div class="product__description">
-									<p>Is life too easy for your D&D party? Is your 5e campaign missing its bite? Then try <strong>Giffyglyph's Darker Dungeons</strong>—150+ pages of fully-modular rules, templates, sheets, and advice you can use in any D&D 5e game. Class rebalancing, lingering wounds, item crafting, socketed jewels, diseases, stress, camping, dread—create a dark and dangerous world!</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Compendium</li>
-									<li>Rules</li>
-									<li>Items</li>
-									<li>Sheets</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1ufAyAnP4YTyJmOvyFQwnJZoTMTe95ETt/view" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-										<li><a href="http://giffyglyph.com/darkerdungeons/grimoire/4.0.0/en/" class="button"><i class="fas fa-fw fa-book-open"></i> Open the Grimoire</a></li>
-										<li><a href="#project-roll20-5e-darker-dungeons" class="button"><i class="fas fa-fw fa-external-link-alt"></i> Roll20 Character Sheet</a></li>
-										<li><a href="https://github.com/giffyglyph/giffyglyphs-darker-dungeons/issues" class="button"><i class="fas fa-fw fa-bug"></i> Raise a Bug</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-monster-maker.jpg" alt="Giffyglyph's Monster Maker">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-giffyglyphs-monster-maker">Giffyglyph's Monster Maker</h5>
-								<div class="product__description">
-									<p>Build new monsters and fun encounters in <i>seconds</i> with <strong>Giffyglyph's Monster Maker</strong>. From lurking minions and controlling elites to striking solos—surprise your players with a wide variety of monster ranks and roles. This compendium contains 85+ pages of templates, monsters, adventures, and advice you can use in any D&D 5e game.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Compendium</li>
-									<li>Rules</li>
-									<li>Monsters</li>
-									<li>Adventures</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1BKZcrdUeeZCiG8WjC1E_Pxr1LCpaGbfY/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-										<li><a href="http://giffyglyph.com/monstermaker/grimoire/2.1.2/en/" class="button"><i class="fas fa-fw fa-book-open"></i> Open the Grimoire</a></li>
-										<li><a href="#product-monster-maker-webapp" class="button"><i class="fas fa-fw fa-external-link-alt"></i> Monster Maker Webapp</a></li>
-										<li><a href="#product-foundry-5e-monster-maker" class="button"><i class="fas fa-fw fa-external-link-alt"></i> Foundry Monster Maker</a></li>
-										<li><a href="https://github.com/giffyglyph/giffyglyphs-monster-maker/issues" class="button"><i class="fas fa-fw fa-bug"></i> Raise a Bug</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-class-compendium.jpg" alt="Giffyglyph's Class Compendium">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-giffyglyphs-class-compendium">Giffyglyph's Class Compendium</h5>
-								<div class="product__description">
-									<p>Put a new twist on 1st-to-10th level gameplay with <strong>Giffyglyph's Class Compendium</strong>—a complete rewrite and rebalancing of all 12 core PHB classes. Spend special class resources to fuel signature class abilities, activate 10th-level capstones, take on new subclasses, and more.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Compendium</li>
-									<li>Classes</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1uyV8AWvsDQ3jKMpeXn7ZhlPXM8slg_yv/view" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-										<li><a href="http://giffyglyph.com/classcompendium/grimoire/1.1.0/en/" class="button"><i class="fas fa-fw fa-book-open"></i> Open the Grimoire</a></li>
-										<li><a href="https://github.com/giffyglyph/giffyglyphs-class-compendium/issues" class="button"><i class="fas fa-fw fa-bug"></i> Raise a Bug</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-card-codex.jpg" alt="Giffyglyph's Card Codex">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-giffyglyphs-card-codex">Giffyglyph's Card Codex</h5>
-								<div class="product__description">
-									<p>Put some physical trinkets in your game with <i>printable cards</i>. <strong>Giffyglyph's Card Codex</strong> contains a full set of condition cards suitable for any D&D 5e game.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Compendium</li>
-									<li>Cards</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1h32q-Dn-vRMMOVWZhBSuV4pRYc120kVD/view" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-										<li><a href="https://github.com/giffyglyph/giffyglyphs-card-codex/issues" class="button"><i class="fas fa-fw fa-bug"></i> Raise a Bug</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-quick-quest.jpg" alt="Giffyglyph's Quick Quest">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-giffyglyphs-quick-quest">Giffyglyph's Quick Quest</h5>
-								<div class="product__description">
-									<p>Start an RPG adventure in just five minutes with <strong>Giffyglyph's Quick Quest</strong>—a one-page d20 RPG system with a narrative, fast-play focus. Low fantasy, high fantasy, horror, sci-fi—whatever your adventuring tastes, <i>Quick Quest</i> can get you playing in no time with the included character sheet and questboard.</p>
-									<p>Translations: French, Spanish</p>
-								</div>
-								<ul class="product__tags">
-									<li>Quick Quest</li>
-									<li>Compendium</li>
-									<li>Rules</li>
-									<li>Sheets</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1IlD57ncSyQp6QOtpN1G2V-8qxKLliNJF/view" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-										<li><a href="https://github.com/giffyglyph/giffyglyphs-quick-quest/issues" class="button"><i class="fas fa-fw fa-bug"></i> Raise a Bug</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<h4 id="products-applications">Applications</h4>
-					<div class="products">
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-monster-maker-webapp.jpg" alt="Monster Maker Webapp">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-monster-maker-webapp">Monster Maker Webapp</h5>
-								<div class="product__description">
-									<p>Build new monsters in seconds with the <strong>Monster Maker Webapp</strong>. This webapp allows you to use <i>Giffyglyph's Monster Maker</i> on any desktop, table, or mobile machine—build fully automated, scaling monsters that auto-adjust when you change their level and save them to your own private vault.</i></p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Application</li>
-									<li>Webapp</li>
-									<li>Monsters</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="http://giffyglyph.com/monstermaker/app/" class="button"><i class="fas fa-fw fa-external-link-alt"></i> Open the webapp</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-foundry-monster-maker.jpg" alt="Foundry 5e Monster Maker">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-foundry-5e-monster-maker">Foundry 5e Monster Maker</h5>
-								<div class="product__description">
-									<p>Build new <a href="https://foundryvtt.com/">Foundry VTT</a> monsters in seconds with the <strong>Foundry 5e Monster Maker</strong>. This module fully supports <i>Giffyglyph's Monster Maker</i>—build fully automated, scaling monsters that auto-adjust when you change their level.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Application</li>
-									<li>Foundry VTT</li>
-									<li>Monsters</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://github.com/giffyglyph/foundry-5e-monster-maker" class="button"><i class="fab fa-fw fa-github"></i> View source code</a></li>
-										<li><a href="https://github.com/giffyglyph/foundry-5e-monster-maker/issues" class="button"><i class="fas fa-fw fa-bug"></i> Raise a Bug</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-foundry-quick-quest.png" class="icon" alt="Foundry Quick Quest">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-foundry-quick-quest">Foundry Quick Quest</h5>
-								<div class="product__description">
-									<p>Play <strong>Quick Quest</strong> online with <a href="https://foundryvtt.com/">Foundry VTT</a>. This system package includes character sheets, item cards, and perks to get you up-and-running in no time.</p>
-								</div>
-								<ul class="product__tags">
-									<li>Quick Quest</li>
-									<li>Application</li>
-									<li>Foundry VTT</li>
-									<li>Rules</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://github.com/giffyglyph/foundry-quick-quest" class="button"><i class="fab fa-fw fa-github"></i> View source code</a></li>
-										<li><a href="https://github.com/giffyglyph/foundry-quick-quest/issues" class="button"><i class="fas fa-fw fa-bug"></i> Raise a Bug</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-roll20-5e-darker-dungeons.jpg" alt="Roll20 5e Darker Dungeons">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-roll20-5e-darker-dungeons">Roll20 5e Darker Dungeons</h5>
-								<div class="product__description">
-									<p>Use <i>Giffyglyph's Darker Dungeons</i> in your online <a href="https://app.roll20.net/">Roll20</a> game with a brand new character sheet. This sheet features a new style modelled after the 5e paper sheet, and supports all major features of <i>Darker Dungeons</i>—inventory slots, stress, survival conditions, etc.</p>
-									<p>To get started, search for <strong>D&D 5e (Darker Dungeons)</strong> in the Roll20 character sheet list.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Application</li>
-									<li>Roll20</li>
-									<li>Rules</li>
-									<li>Sheets</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://github.com/giffyglyph/roll20-5e-darker-dungeons" class="button"><i class="fab fa-fw fa-github"></i> View source code</a></li>
-										<li><a href="https://github.com/giffyglyph/roll20-5e-darker-dungeons/issues" class="button"><i class="fas fa-fw fa-bug"></i> Raise a Bug</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-reroller.jpg" alt="Reroller">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-monster-maker-webapp">Reroller</h5>
-								<div class="product__description">
-									<p>Generate randomised treasure with <strong>Giffyglyph's Reroller</strong>. This webapp includes both <i>individual treasure</i> and <i>hoard treasure</i> tables from the DMG.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Application</li>
-									<li>Webapp</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="http://giffyglyph.com/reroller/" class="button"><i class="fas fa-fw fa-external-link-alt"></i> Open the webapp</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<h4 id="products-classes">Classes</h4>
-					<div class="products">
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-brilliant-bard.png" class="icon" alt="The Brilliant Bard">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-brilliant-bard">The Brilliant Bard</h5>
-								<div class="product__description">
-									<p>Become a brilliant bard, a master of words and songs and sounds. This supplement rebalances the 5e bard for levels 1-to-10, adding a new resource (Composition), new class features (such as <i>Chords of Power</i>), and an expanded spell list.</p>
-									<p>Includes 3 subclasses: the <strong>College of Dance</strong>, the <strong>College of Lore</strong>, and the <strong>College of Tongues</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Bard</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1ZdWyEdQEc5hIJM7gVqbSqbSL6dlwYRbr/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-brutal-barbarian.png" class="icon" alt="The Brutal Barbarian">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-brutal-barbarian">The Brutal Barbarian</h5>
-								<div class="product__description">
-									<p>Become a brutal barbarian, a force of primal power and rage. This supplement rebalances the 5e barbarian for levels 1-to-10, adding a new resource (Brutality) and new class features (such as <i>Brutalities</i>).</p>
-									<p>Includes 3 subclasses: <strong>Path of the Berserker</strong>, <strong>Path of the Conqueror</strong>, and <strong>Path of the Fanatic</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Barbarian</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1Wx2hcD0GoqFuJ5h3bVjbOOjFk3ZzF05j/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-capable-cleric.png" class="icon" alt="The Capable Cleric">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-capable-cleric">The Capable Cleric</h5>
-								<div class="product__description">
-									<p>Become a capable cleric, a conduit of divine power. This supplement rebalances the 5e cleric for levels 1-to-10, adding a new resource (Faith), new class features (such as <i>Benedictions</i>), and an expanded spell list.</p>
-									<p>Includes 1 subclass: <strong>Life Domain</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Cleric</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1FKUuOu39yCDpIPLUuCddTfy1RZ9gtfjZ/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-dynamic-druid.png" class="icon" alt="The Dynamic Druid">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-dynamic-druid">The Dynamic Druid</h5>
-								<div class="product__description">
-									<p>Become a dynamic druid, a guardian of the wild world. This supplement rebalances the 5e druid for levels 1-to-10, adding a new resource (Primal Power), new class features (such as <i>Weald Walker</i>), and entirely-revamped <i>Wild Shape</i> system, and an expanded spell list.</p>
-									<p>Includes 2 subclasses: <strong>Circle of the Beast</strong> and <strong>Circle of the Land</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Druid</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1dC5NMv5sJBnEDrE4U3YZk1MXySVYm6Xn/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-fearless-fighter.png" class="icon" alt="The Fearless Fighter">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-fearless-fighter">The Fearless Fighter</h5>
-								<div class="product__description">
-									<p>Become a fearless fighter, a master of weaponry and warfare. This supplement rebalances the 5e fighter for levels 1-to-10, adding a new resource (Resolve) and new class features (such as <i>Maneuvers</i> and <i>Fighting Focus</i>).</p>
-									<p>Includes 3 subclasses: <strong>Champion</strong>, <strong>Commander</strong>, and <strong>Defender</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Fighter</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1s9oE74xXN-n2sbtWsS7yRtI58u1a5dId/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-masterful-monk.png" class="icon" alt="The Masterful Monk">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-masterful-monk">The Masterful Monk</h5>
-								<div class="product__description">
-									<p>Become a masterful monk, a champion of martial arts and mystic ki. This supplement rebalances the 5e monk for levels 1-to-10, adding new class features (such as <i>Mantras</i> and <i>Lightning Flurry</i>).</p>
-									<p>Includes 2 subclasses: <strong>Way of the Open Hand</strong> and <strong>Way of the Elementalist</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Monk</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1HFGpoFwxf0XuLwsyOXrc3dXsV70ufcNK/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-pious-paladin.png" class="icon" alt="The Pious Paladin">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-pious-paladin">The Pious Paladin</h5>
-								<div class="product__description">
-									<p>Become a pious paladin, an oath-sworn avenger. This supplement rebalances the 5e paladin for levels 1-to-10, adding a new class resource (Conviction), new class features (such as <i>Smite</i> and <i>Voice of the Crusader</i>), and an expanded spell list.</p>
-									<p>Includes 1 subclass: <strong>Oath of Devotion</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Paladin</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1zAgwgReJQ5mYYIYTXf32JBEsDhcnSQA2/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-rakish-rogue.png" class="icon" alt="The Rakish Rogue">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-rakish-rogue">The Rakish Rogue</h5>
-								<div class="product__description">
-									<p>Become a rakish rogue, a master of stealth and deception. This supplement rebalances the 5e rogue for levels 1-10, adding a new resource (Focus) and new class features (such as <i>Exploits</i> and <i>Roguish Fortune</i>).</p>
-									<p>Includes 1 subclass: <strong>Thief</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Rogue</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1LOla-i7OXTMBtAqKhA8Wnh_J3qFMDS0T/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-roving-ranger.png" class="icon" alt="The Roving Ranger">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-roving-ranger">The Roving Ranger</h5>
-								<div class="product__description">
-									<p>Become a roving ranger, a hunter of wild prey. This supplement rebalances the 5e ranger, adding a new resource (Scrap) and new class features (such as <i>Traps</i> and <i>Hunter's Focus</i>). In addition, the ranger is now a martial class by default—spellcasting is moved into the <i>Feywalker</i> subclass.</p>
-									<p>Includes 1 subclass: <strong>Feywalker</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Ranger</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/15QHtpXBlothBfG8NyQCXV1lh0-3ADVVZ/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-supreme-sorcerer.png" class="icon" alt="The Supreme Sorcerer">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-supreme-sorcerer">The Supreme Sorcerer</h5>
-								<div class="product__description">
-									<p>Become a supreme sorcerer, a wild font of arcane power. This supplement rebalances the 5e sorcerer for levels 1-to-10, adding a new resource (Sorcery), new class features (such as <i>Sorcerous Recovery</i> and <i>Metamorphosis</i>), and an expanded spell list.</p>
-									<p>Includes 1 subclass: <strong>Draconic Bloodline</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Sorcerer</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1Nms-R6dD3yHpNF6DgbPnSxfHTbMuYgm1/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-wicked-warlock.png" class="icon" alt="The Wicked Warlock">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-wicked-warlock">The Wicked Warlock</h5>
-								<div class="product__description">
-									<p>Become a wicked warlock, a seeker of forbidden knowledge. This supplement rebalances the 5e warlock for levels 1-to-10, adding new class features (such as <i>Sacrificial Bargain</i>), scaling Pact Boon items—including the new <i>Pact of the Wand</i>—and an expanded spell list.</p>
-									<p>Includes 1 subclass: <strong>Fiend</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Warlock</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1oFHOGlS0Um8RVvJjnzx13LtFk3fObOo_/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-wondrous-wizard.png" class="icon" alt="The Wondrous Wizard">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-wondrous-wizard">The Wondrous Wizard</h5>
-								<div class="product__description">
-									<p>Become a wondrous wizard, a student of magic and the secret arcane arts. This supplement rebalances the 5e wizard for levels 1-to-10, adding new class features (such as <i>Spellscript</i> and <i>Signature Spell</i>) and an expanded spell list.</p>
-									<p>Includes 1 subclass: <strong>Evocation</strong>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>D&D 5e</li>
-									<li>Class</li>
-									<li>Wizard</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://drive.google.com/file/d/1Flu4eIY6gAV9dM5ZbghT0YRNBneyUW-8/view?usp=sharing" class="button"><i class="fas fa-fw fa-file-download"></i> Download PDF</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
+					<h4 id="compendiums">Compendiums</h4>
+					<div class="products products--compendiums"></div>
+					<h4 id="applications">Applications</h4>
+					<div class="products products--applications"></div>
+					<h4 id="classes">Classes</h4>
+					<div class="products products--classes"></div>
 				</section>
-				<div class="divider divider--alt">
+				<div class="divider divider--alt" id="community">
 					<h3 class="divider__title">Community</h3>
 				</div>
 				<section class="section section--community">
-					<h4>Social</h4>
-					<div class="products">
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-livestreams.png" class="icon" alt="Giffyglyph's Livestreams">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-giffyglyphs-livestreams">Giffyglyph's Livestreams</h5>
-								<div class="product__description">
-									<p>I try to stream at least once a week to showcase new work, reveal work-in-development, chat about new ideas, and generally <i>hang out</i>.</p>
-								</div>
-								<ul class="product__tags">
-									<li>Community</li>
-									<li>Stream</li>
-									<li>Video</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://twitch.tv/giffyglyph/" class="button"><i class="fab fa-fw fa-twitch"></i> Visit the Livestreams</a></li>
-										<li><a href="https://youtube.com/giffyglyph/" class="button"><i class="fab fa-fw fa-youtube"></i> Watch the VODs</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-aberrant-archives.png" class="icon" alt="Giffyglyph's Aberrant Archives">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-giffyglyphs-aberrant-archives">The Aberrant Archives</h5>
-								<div class="product__description">
-									<p>Check out the <a href="https://giffyglyph.com/aberrant-archives/">Aberrant Archives</a> to find a wealth of community-created content for <strong>Darker Dungeons</strong>, <strong>Monster Maker</strong>, and <strong>Class Compendium</strong>. Become a patron to join the archives and submit your own content.</p>
-								</div>
-								<ul class="product__tags">
-									<li>Community</li>
-									<li>Wiki</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://giffyglyph.com/aberrant-archives/" class="button"><i class="fas fa-fw fa-external-link-alt"></i> Visit the Archives</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<h4>Support</h4>
-					<div class="products">
-						<div class="product">
-							<div class="product__icon">
-								<img src="./images/project-patreon.png" class="icon" alt="Giffyglyph's Patreon">
-							</div>
-							<div class="product__body">
-								<h5 class="product__title" id="product-giffyglyphs-livestreams">Giffyglyph's Patreon</h5>
-								<div class="product__description">
-									<p>Become a patron to unlock <strong>print-friendly</strong> and <strong>bookmarked</strong> versions of my major releases. In addition, you'll be invited to my <strong>Discord</strong> server.</p>
-								</div>
-								<ul class="product__tags">
-									<li>Community</li>
-									<li>Patreon</li>
-									<li>Discord</li>
-								</ul>
-								<div class="product__actions">
-									<ul class="actions__primary">
-										<li><a href="https://patreon.com/giffyglyph/" class="button"><i class="fab fa-fw fa-patreon"></i> Become a Patron</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
+					<h4 id="social">Social</h4>
+					<div class="products products--social"></div>
+					<h4 id="support">Support</h4>
+					<div class="products products--support"></div>
 				</section>
 			</main>
 			<footer class="page__footer">
 				<div class="container">
 					<h3>Contact</h3>
 					<ul class="contact">
-						<li>
-							<a href="https://ko-fi.com/giffyglyph"><i class="fas fa-fw fa-heart"></i><span>Ko-fi</span></a>
-						</li>
-						<li>
-							<a href="https://patreon.com/giffyglyph"><i class="fab fa-fw fa-patreon"></i><span>Patreon</span></a>
-						</li>
-						<li>
-							<a href="https://reddit.com/user/giffyglyph"><i class="fab fa-fw fa-reddit-alien"></i><span>Reddit</span></a>
-						</li>
-						<li>
-							<a href="https://twitch.tv/giffyglyph"><i class="fab fa-fw fa-twitch"></i><span>Twitch</span></a>
-						</li>
-						<li>
-							<a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg"><i class="fab fa-fw fa-youtube"></i><span>Youtube</span></a>
-						</li>
-						<li>
-							<a href="https://www.facebook.com/giffyglyph"><i class="fab fa-fw fa-facebook"></i><span>Facebook</span></a>
-						</li>
-						<li>
-							<a href="https://twitter.com/giffyglyph"><i class="fab fa-fw fa-twitter"></i><span>Twitter</span></a>
-						</li>
-						<li>
-							<a href="mailto:giffyglyph@gmail.com"><i class="fas fa-fw fa-envelope"></i><span>Email</span></a>
-						</li>
+						<li><a href="https://ko-fi.com/giffyglyph"><i class="fas fa-fw fa-heart"></i><span>Ko-fi</span></a></li>
+						<li><a href="https://patreon.com/giffyglyph"><i class="fab fa-fw fa-patreon"></i><span>Patreon</span></a></li>
+						<li><a href="https://reddit.com/user/giffyglyph"><i class="fab fa-fw fa-reddit-alien"></i><span>Reddit</span></a></li>
+						<li><a href="https://twitch.tv/giffyglyph"><i class="fab fa-fw fa-twitch"></i><span>Twitch</span></a></li>
+						<li><a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg"><i class="fab fa-fw fa-youtube"></i><span>Youtube</span></a></li>
+						<li><a href="https://www.facebook.com/giffyglyph"><i class="fab fa-fw fa-facebook"></i><span>Facebook</span></a></li>
+						<li><a href="https://twitter.com/giffyglyph"><i class="fab fa-fw fa-twitter"></i><span>Twitter</span></a></li>
+						<li><a href="mailto:giffyglyph@gmail.com"><i class="fas fa-fw fa-envelope"></i><span>Email</span></a></li>
 					</ul>
 				</div>
 			</footer>

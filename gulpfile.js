@@ -28,16 +28,42 @@ gulp.task('build-server', function (cb) {
 });
 
 /*
- * Deploy all relevant fonts to the dist folder.
+ * Deploy all relevant pages to the dist folder.
  */
 gulp.task('build-pages', function (cb) {
+	const products = require('./src/modules/products.js');
 	return gulp.src("./src/pages/**/*.html")
 		.pipe(using())
 		.pipe(dom(function() {
+			["compendiums", "applications", "classes", "social", "support"].forEach((x) => {
+				[...this.querySelectorAll(`.products--${x}`)].map((y) => y.innerHTML = products[x].map((z) => _renderProduct(z)).join(''));
+			});
 			return this;
 		}))
 		.pipe(beautify.html({ indent_with_tabs: true }))
 		.pipe(gulp.dest('./dist/'));
+	
+	function _renderProduct(product) {
+		return `
+			<div class="product" id="${product.code}">
+				<div class="product__icon">
+					<img src="${product.icon.src}" alt="${product.title}">
+				</div>
+				<div class="product__body">
+					<h5 class="product__title"><a href="#${product.code}">${product.title}</a></h5>
+					<div class="product__description">${product.description}</div>
+					<ul class="product__tags">
+						${product.tags.map((x) => `<li>${x}</li>`).join('')}
+					</ul>
+					<div class="product__actions">
+						<ul class="actions__primary">
+							${product.actions.map((x) => `<li>${x}</li>`).join('')}
+						</ul>
+					</div>
+				</div>
+			</div>
+		`;
+	}
 });
 
 /*
