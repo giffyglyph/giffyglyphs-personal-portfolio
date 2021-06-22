@@ -11,8 +11,8 @@ module.exports = {
 			tags: ["D&D 5e", "Compendium", "Rules", "Items", "Sheets"],
 			actions: [
 				"<a href='https://drive.google.com/file/d/1ufAyAnP4YTyJmOvyFQwnJZoTMTe95ETt/view' class='button'><i class='fas fa-fw fa-file-download'></i> Download PDF</a>",
-				"<a href='http://giffyglyph.com/darkerdungeons/grimoire/4.0.0/en/' class='button'><i class='fas fa-fw fa-book-open'></i> Open the Grimoire</a>",
-				"<a href='#project-roll20-5e-darker-dungeons' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Roll20 Character Sheet</a>",
+				"<a href='/darkerdungeons/grimoire/4.0.0/en/' class='button'><i class='fas fa-fw fa-book-open'></i> Open the Grimoire</a>",
+				"<a href='#roll20-5e-darker-dungeons' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Roll20 Character Sheet</a>",
 				"<a href='https://github.com/giffyglyph/giffyglyphs-darker-dungeons/issues' class='button'><i class='fas fa-fw fa-bug'></i> Raise a Bug</a>"
 			]
 		},
@@ -27,9 +27,9 @@ module.exports = {
 			tags: ["D&D 5e", "Compendium", "Rules", "Monsters", "Adventure"],
 			actions: [
 				"<a href='https://drive.google.com/file/d/1BKZcrdUeeZCiG8WjC1E_Pxr1LCpaGbfY/view?usp=sharing' class='button'><i class='fas fa-fw fa-file-download'></i> Download PDF</a>",
-				"<a href='http://giffyglyph.com/monstermaker/grimoire/2.1.2/en/' class='button'><i class='fas fa-fw fa-book-open'></i> Open the Grimoire</a>",
-				"<a href='#product-monster-maker-webapp' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Monster Maker Webapp</a>",
-				"<a href='#product-foundry-5e-monster-maker' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Foundry Monster Maker</a>",
+				"<a href='/monstermaker/grimoire/2.1.2/en/' class='button'><i class='fas fa-fw fa-book-open'></i> Open the Grimoire</a>",
+				"<a href='#monster-maker-webapp' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Monster Maker Webapp</a>",
+				"<a href='#foundry-5e-monster-maker' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Foundry Monster Maker</a>",
 				"<a href='https://github.com/giffyglyph/giffyglyphs-monster-maker/issues' class='button'><i class='fas fa-fw fa-bug'></i> Raise a Bug</a>"
 			]
 		},
@@ -44,7 +44,7 @@ module.exports = {
 			tags: ["D&D 5e", "Compendium", "Classes"],
 			actions: [
 				"<a href='https://drive.google.com/file/d/1uyV8AWvsDQ3jKMpeXn7ZhlPXM8slg_yv/view' class='button'><i class='fas fa-fw fa-file-download'></i> Download PDF</a>",
-				"<a href='http://giffyglyph.com/classcompendium/grimoire/1.1.0/en/' class='button'><i class='fas fa-fw fa-book-open'></i> Open the Grimoire</a>",
+				"<a href='/classcompendium/grimoire/1.1.0/en/' class='button'><i class='fas fa-fw fa-book-open'></i> Open the Grimoire</a>",
 				"<a href='https://github.com/giffyglyph/giffyglyphs-class-compendium/issues' class='button'><i class='fas fa-fw fa-bug'></i> Raise a Bug</a>"
 			]
 		},
@@ -88,7 +88,7 @@ module.exports = {
 			description: "<p>Build new monsters in seconds with the <strong>Monster Maker Webapp</strong>. This webapp allows you to use <i>Giffyglyph's Monster Maker</i> on any desktop, table, or mobile machine—build fully automated, scaling monsters that auto-adjust when you change their level and save them to your own private vault.</p>",
 			tags: ["D&D 5e", "Application", "Webapp", "Monsters"],
 			actions: [
-				"<a href='http://giffyglyph.com/monstermaker/app/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Open the webapp</a>"
+				"<a href='/monstermaker/app/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Open the webapp</a>"
 			]
 		},
 		{
@@ -143,7 +143,7 @@ module.exports = {
 			description: "<p>Generate randomised treasure with <strong>Giffyglyph's Reroller</strong>. This webapp includes both <i>individual treasure</i> and <i>hoard treasure</i> tables from the DMG.</p>",
 			tags: ["D&D 5e", "Application", "Webapp"],
 			actions: [
-				"<a href='http://giffyglyph.com/reroller/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Open the webapp</a>"
+				"<a href='/reroller/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Open the webapp</a>"
 			]
 		}
 	],

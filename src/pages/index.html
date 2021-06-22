@@ -22,6 +22,11 @@
 			gtag('config', 'UA-74105917-2');
 
 			$(document).ready(function() {
+
+				$(".navigation__toggle").click(function() {
+					$(".navigation__menu").toggleClass("hidden");
+				});
+
 				fetch(
 					"server/github.php",
 					{
@@ -52,35 +57,34 @@
 						});
 					});
 					activeProjects = activeProjects.map((x) => `
-						<div class="project">
-							<div class="project__status">
-								<div class="status__percentage">${Math.round(x.progress.donePercentage)}%</div>
-								<div class="status__done" style="width:${Math.round(x.progress.donePercentage)}%"></div>
-								<div class="status__inprogress" style="width:${Math.round(x.progress.inProgressPercentage)}%"></div>
-								<div class="status__todo" style="width:${Math.round(x.progress.todoPercentage)}%"></div>
+						<div class="feature feature--project" id="${x.name.toLowerCase().replaceAll(/[ \.]/g, "-").replaceAll(/:/g, "")}">
+							<div class="feature__icon">
+								<div class="project__status">
+									<div class="status__percentage">${Math.round(x.progress.donePercentage)}%</div>
+									<div class="status__done" style="width:${Math.round(x.progress.donePercentage)}%"></div>
+									<div class="status__inprogress" style="width:${Math.round(x.progress.inProgressPercentage)}%"></div>
+									<div class="status__todo" style="width:${Math.round(x.progress.todoPercentage)}%"></div>
+								</div>
 							</div>
-							<div class="project__title">${x.name}</div>
-							<div class="project__description">${x.body}</div>
-							<div class="project__actions">
-								<ul class="actions__primary">
+							<div class="feature__body">
+								<div class="feature__title"><a href="#${x.name.toLowerCase().replaceAll(/[ \.]/g, "-").replaceAll(/:/g, "")}">${x.name}</a></div>
+								<div class="feature__description">${x.body}</div>
+								<ul class="feature__actions">
 									<li><a href="https://github.com/${x.resourcePath}" class="button"><i class="fab fa-fw fa-github"></i> View Project</a></li>
 								</ul>
 							</div>
 						</div>
 					`);
 					pendingProjects = pendingProjects.map((x) => `
-						<div class="project"><span class="project__title">${x.name.replace("[PENDING] ", "")}</span> <span class="project__description">${x.body}</span></div>
+						<div class="pending-project"><span class="pending-project__title"><a href="https://github.com/${x.resourcePath}">${x.name.replace("[PENDING] ", "")}</a></span> <span class="pending-project__description">${x.body}</span></div>
 					`)
 					$("[data-projects='active']").html(activeProjects.join(''));
 					$("[data-projects='pending']").html(`
 						${pendingProjects.join('')}
-						<div class="project__actions">
-							<ul class="actions__primary">
-								<li><a href="https://patreon.com/giffyglyph" class="button"><i class="fab fa-fw fa-patreon"></i> Suggest other Projects</a></li>
-							</ul>
-						</div>
+						<ul class="feature__actions">
+							<li><a href="https://patreon.com/giffyglyph" class="button"><i class="fab fa-fw fa-patreon"></i> Suggest other Projects</a></li>
+						</ul>
 					`);
-
 				})
 				.catch((error) => {
 					console.error(error);
@@ -103,18 +107,36 @@
 						<li><a href="mailto:giffyglyph@gmail.com"><i class="fas fa-fw fa-envelope"></i><span>Email</span></a></li>
 						<li><a href="https://patreon.com/giffyglyph" class="patreon">Support on Patreon</a></li>
 					</ul>
+					<button class="navigation__toggle"><i class="fas fa-fw fa-bars"></i></button>
+				</div>
+				<div class="navigation__menu hidden">
+					<ul>
+						<li><a href="#activity"><i class="fas fa-fw fa-clock"></i><span>Recent Activity</span></a></li>
+						<li><a href="#releases"><i class="fas fa-fw fa-book-open"></i><span>All Releases</span></a></li>
+						<li><a href="#community"><i class="fas fa-fw fa-users"></i><span>Community</span></a></li>
+					</ul>
+					<ul>
+						<li><a href="https://ko-fi.com/giffyglyph"><i class="fas fa-fw fa-heart"></i><span>Ko-fi</span></a></li>
+						<li><a href="https://reddit.com/user/giffyglyph"><i class="fab fa-fw fa-reddit-alien"></i><span>Reddit</span></a></li>
+						<li><a href="https://twitch.tv/giffyglyph"><i class="fab fa-fw fa-twitch"></i><span>Twitch</span></a></li>
+						<li><a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg"><i class="fab fa-fw fa-youtube"></i><span>Youtube</span></a></li>
+						<li><a href="https://www.facebook.com/giffyglyph"><i class="fab fa-fw fa-facebook"></i><span>Facebook</span></a></li>
+						<li><a href="https://twitter.com/giffyglyph"><i class="fab fa-fw fa-twitter"></i><span>Twitter</span></a></li>
+						<li><a href="mailto:giffyglyph@gmail.com"><i class="fas fa-fw fa-envelope"></i><span>Email</span></a></li>
+						<li><a href="https://patreon.com/giffyglyph"><i class="fab fa-fw fa-patreon"></i><span>Support on Patreon</span></a></li>
+					</ul>
 				</div>
 			</nav>
 			<header class="page__header">
 				<h1 class="header__title"><a href=".">Giffyglyph</a></h1>
-				<div class="header__subtitle"><span>Writer</span><span>Coder</span><span>Artificer</span><span>Dungeon Master</span></div>
+				<div class="header__subtitle"><span>Writer</span><span>Coder</span><span>Dungeon Master</span><span>Artificer</span></div>
 				<div class="header__logo">
 					<img src="./images/icon-giffyglyph.png" alt="Giffyglyph"/>
 				</div>
 			</header>
 			<main class="page__body">
-				<section class="section section--introduction">
-					<div class="well">
+				<section class="introduction">
+					<div class="introduction__about">
 						<h2>Hi, I'm Giffyglyph</h2>
 						<p><strong>I write rules. I build tools. I play games.</strong></p>
 						<p>Here you'll find a <a href="#releases">collection of my work</a> and <a href="#activity">other things I have in the pipeline</a>. If you have any questions or feedback, please contact me via <a href="mailto:giffyglyph@gmail.com">email</a>, <a href="https://twitter.com/giffyglyph">Twitter</a>, <a href="https://facebook.com/giffyglyph">Facebook</a>, or <a href="https://reddit.com/user/giffyglyph">Reddit</a>. You can also find my weekly Q&A streams on <a href="https://twitch.tv/giffyglyph">Twitch</a> and <a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg">YouTube</a>.</p>
@@ -127,50 +149,54 @@
 						<p>If you've enjoyed my work and would like to help support the next creation, consider <a href="https://ko-fi.com/giffyglyph">buying me a coffee</a> through <strong>Ko-fi</strong> or <a href="https://patreon.com/giffyglyph">becoming a patron</a> through <strong>Patreon</strong>.</p>
 						<p><strong>Thanks for visiting!</strong></p>
 					</div>
-					<div class="twitter">
-						<a height=550 class="twitter-timeline" href="https://twitter.com/giffyglyph?ref_src=twsrc%5Etfw" data-chrome="nofooter transparent">Tweets by giffyglyph</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+					<div class="introduction__twitter">
+						<a height="0" class="twitter-timeline" href="https://twitter.com/giffyglyph?ref_src=twsrc%5Etfw" data-chrome="nofooter transparent">Tweets by giffyglyph</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 					</div>
 				</section>
-				<div class="divider divider--alt" id="activity">
-					<h3 class="divider__title">Activity</h3>
-				</div>
-				<section class="section section--activity">
-					<h4>Current Projects</h4>
-					<div class="activity__current">
-						<div class="projects projects--active" data-projects="active"></div>
+				<section class="showcase showcase--alt showcase--activity" id="activity">
+					<div class="showcase__header">
+						<h3 class="header__title">Activity</h3>
 					</div>
-					<h4>Pending Projects</h4>
-					<div class="activity__pending">
-						<div class="projects__icon">
-							<img src="./images/project-pending.png" class="icon" alt="Pending Projects">
+					<div class="showcase__body">
+						<h4>Current Projects</h4>
+						<div class="features features--projects active-projects" data-projects="active"></div>
+						<h4>Pending Projects</h4>
+						<div class="feature pending-projects">
+							<div class="feature__icon">
+								<img src="./images/project-pending.png" class="icon" alt="Pending Projects">
+							</div>
+							<div class="feature__body" data-projects="pending"></div>
 						</div>
-						<div class="projects projects--pending" data-projects="pending"></div>
 					</div>
 				</section>
-				<div class="divider" id="releases">
-					<h3 class="divider__title">Releases</h3>
-					<ul class="shortcuts">
-						<li><a href="#compendiums">Compendiums</a></li>
-						<li><a href="#applications">Applications</a></li>
-						<li><a href="#classes">Classes</a></li>
-					</ul>
-				</div>
-				<section class="section section--products">
-					<h4 id="compendiums">Compendiums</h4>
-					<div class="products products--compendiums"></div>
-					<h4 id="applications">Applications</h4>
-					<div class="products products--applications"></div>
-					<h4 id="classes">Classes</h4>
-					<div class="products products--classes"></div>
+				<section class="showcase showcase--releases" id="releases">
+					<div class="showcase__header">
+						<h3 class="header__title">Releases</h3>
+						<ul class="header__shortcuts">
+							<li><a href="#compendiums">Compendiums</a></li>
+							<li><a href="#applications">Applications</a></li>
+							<li><a href="#classes">Classes</a></li>
+						</ul>
+					</div>
+					<div class="showcase__body">
+						<h4 id="compendiums">Compendiums</h4>
+						<div class="features features--products products--compendiums"></div>
+						<h4 id="applications">Applications</h4>
+						<div class="features features--products products--applications"></div>
+						<h4 id="classes">Classes</h4>
+						<div class="features features--products products--classes"></div>
+					</div>
 				</section>
-				<div class="divider divider--alt" id="community">
-					<h3 class="divider__title">Community</h3>
-				</div>
-				<section class="section section--community">
-					<h4 id="social">Social</h4>
-					<div class="products products--social"></div>
-					<h4 id="support">Support</h4>
-					<div class="products products--support"></div>
+				<section class="showcase showcase--alt showcase--community" id="community">
+					<div class="showcase__header">
+						<h3 class="header__title">Community</h3>
+					</div>
+					<div class="showcase__body">
+						<h4 id="social">Social</h4>
+						<div class="features features--products products--social"></div>
+						<h4 id="support">Support</h4>
+						<div class="features features--products products--support"></div>
+					</div>
 				</section>
 			</main>
 			<footer class="page__footer">

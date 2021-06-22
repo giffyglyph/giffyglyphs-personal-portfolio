@@ -45,25 +45,37 @@ gulp.task('build-pages', function (cb) {
 	
 	function _renderProduct(product) {
 		return `
-			<div class="product" id="${product.code}">
-				<div class="product__icon">
+			<div class="feature feature--product" id="${product.code}">
+				<div class="feature__icon">
 					<img src="${product.icon.src}" alt="${product.title}">
 				</div>
-				<div class="product__body">
-					<h5 class="product__title"><a href="#${product.code}">${product.title}</a></h5>
-					<div class="product__description">${product.description}</div>
-					<ul class="product__tags">
+				<div class="feature__body">
+					<h5 class="feature__title"><a href="#${product.code}">${product.title}</a></h5>
+					<div class="feature__description">
+						<div class="feature__icon">
+							<img src="${product.icon.src}" alt="${product.title}">
+						</div>
+						${product.description}
+					</div>
+					<ul class="feature__tags">
 						${product.tags.map((x) => `<li>${x}</li>`).join('')}
 					</ul>
-					<div class="product__actions">
-						<ul class="actions__primary">
-							${product.actions.map((x) => `<li>${x}</li>`).join('')}
-						</ul>
-					</div>
+					<ul class="feature__actions">
+						${product.actions.map((x) => `<li>${x}</li>`).join('')}
+					</ul>
 				</div>
 			</div>
 		`;
 	}
+});
+
+/*
+ * Deploy all relevant htaccess files to the dist folder.
+ */
+gulp.task('build-htaccess', function (cb) {
+	return gulp.src("./src/pages/**/.htaccess")
+		.pipe(using())
+		.pipe(gulp.dest('./dist/'));
 });
 
 /*
@@ -98,6 +110,7 @@ gulp.task('purge', function (cb) {
 gulp.task('watch', function(cb) {
 	gulp.watch('./src/images/**/*.+(jpg|jpeg|gif|png|svg)', gulp.series(['build-images']));
 	gulp.watch('./src/pages/**/*.html', gulp.series(['build-pages']));
+	gulp.watch('./src/pages/**/.htaccess', gulp.series(['build-htaccess']));
 	gulp.watch('./src/stylesheets/**/*.scss', gulp.series(['build-stylesheets']));
 	gulp.watch('./src/server/**/*.*', gulp.series(['build-server']));
 });
@@ -105,7 +118,7 @@ gulp.task('watch', function(cb) {
 /*
  * Master build tasks.
  */
-gulp.task('build', gulp.series('purge', gulp.parallel('build-server', 'build-images', 'build-pages', 'build-stylesheets'), function(cb) {
+gulp.task('build', gulp.series('purge', gulp.parallel('build-server', 'build-images', 'build-pages', 'build-stylesheets', 'build-htaccess'), function(cb) {
 	return cb();
 }));
 gulp.task('build-and-watch', gulp.series('build', 'watch'));
