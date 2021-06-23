@@ -88,7 +88,9 @@ module.exports = {
 			description: "<p>Build new monsters in seconds with the <strong>Monster Maker Webapp</strong>. This webapp allows you to use <i>Giffyglyph's Monster Maker</i> on any desktop, table, or mobile machine—build fully automated, scaling monsters that auto-adjust when you change their level and save them to your own private vault.</p>",
 			tags: ["D&D 5e", "Application", "Webapp", "Monsters"],
 			actions: [
-				"<a href='/monstermaker/app/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Open the webapp</a>"
+				"<a href='/monstermaker/app/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Open the webapp</a>",
+				"<a href='https://github.com/giffyglyph/webapp-5e-monster-maker' class='button'><i class='fab fa-fw fa-github'></i> View source code</a>",
+				"<a href='https://github.com/giffyglyph/webapp-5e-monster-maker/issues' class='button'><i class='fas fa-fw fa-bug'></i> Raise a Bug</a>"
 			]
 		},
 		{
@@ -129,6 +131,7 @@ module.exports = {
 			description: "<p>Use <i>Giffyglyph's Darker Dungeons</i> in your online <a href='https://app.roll20.net/'>Roll20</a> game with a brand new character sheet. This sheet features a new style modelled after the 5e paper sheet, and supports all major features of <i>Darker Dungeons</i>—inventory slots, stress, survival conditions, etc.</p><p>To get started, search for <strong>D&amp;D 5e (Darker Dungeons)</strong> in the Roll20 character sheet list.</p>",
 			tags: ["D&D 5e", "Application", "Roll20", "Rules", "Sheets"],
 			actions: [
+				"<a href='/darkerdungeons/roll20/index.html' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Try the Demo</a>",
 				"<a href='https://github.com/giffyglyph/roll20-5e-darker-dungeons' class='button'><i class='fab fa-fw fa-github'></i> View source code</a>",
 				"<a href='https://github.com/giffyglyph/roll20-5e-darker-dungeons/issues' class='button'><i class='fas fa-fw fa-bug'></i> Raise a Bug</a>"
 			]
@@ -143,7 +146,9 @@ module.exports = {
 			description: "<p>Generate randomised treasure with <strong>Giffyglyph's Reroller</strong>. This webapp includes both <i>individual treasure</i> and <i>hoard treasure</i> tables from the DMG.</p>",
 			tags: ["D&D 5e", "Application", "Webapp"],
 			actions: [
-				"<a href='/reroller/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Open the webapp</a>"
+				"<a href='/reroller/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Open the webapp</a>",
+				"<a href='https://github.com/giffyglyph/webapp-5e-rapid-reroller' class='button'><i class='fab fa-fw fa-github'></i> View source code</a>",
+				"<a href='https://github.com/giffyglyph/webapp-5e-rapid-reroller/issues' class='button'><i class='fas fa-fw fa-bug'></i> Raise a Bug</a>"
 			]
 		}
 	],
@@ -330,7 +335,9 @@ module.exports = {
 			description: "<p>Check out the <a href='https://giffyglyph.com/aberrant-archives/'>Aberrant Archives</a> to find a wealth of community-created content for <strong>Darker Dungeons</strong>, <strong>Monster Maker</strong>, and <strong>Class Compendium</strong>. Become a patron to join the archives and submit your own content.</p>",
 			tags: ["Community", "Wiki"],
 			actions: [
-				"<a href='https://giffyglyph.com/aberrant-archives/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Visit the Archives</a>"
+				"<a href='https://giffyglyph.com/aberrant-archives/' class='button'><i class='fas fa-fw fa-external-link-alt'></i> Visit the Archives</a>",
+				"<a href='https://github.com/giffyglyph/mediawiki-skin-aberrant' class='button'><i class='fab fa-fw fa-github'></i> View source code</a>",
+				"<a href='https://github.com/giffyglyph/mediawiki-skin-aberrant/issues' class='button'><i class='fas fa-fw fa-bug'></i> Raise a Bug</a>"
 			]
 		}
 	],
