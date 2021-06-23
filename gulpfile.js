@@ -47,13 +47,13 @@ gulp.task('build-pages', function (cb) {
 		return `
 			<div class="feature feature--product" id="${product.code}">
 				<div class="feature__icon">
-					<img src="${product.icon.src}" alt="${product.title}">
+					<img src="${product.icon.src}" alt="${product.title}" loading="lazy" width:"100%" height:"auto">
 				</div>
 				<div class="feature__body">
 					<h5 class="feature__title"><a href="#${product.code}">${product.title}</a></h5>
 					<div class="feature__description">
 						<div class="feature__icon">
-							<img src="${product.icon.src}" alt="${product.title}">
+							<img src="${product.icon.src}" alt="${product.title}" loading="lazy" width:"100%" height:"auto">
 						</div>
 						${product.description}
 					</div>

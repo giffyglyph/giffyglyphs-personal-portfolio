@@ -7,90 +7,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 		<link href="./stylesheets/giffyglyph.css" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Lato:400,700,900" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script src="https://www.googletagmanager.com/gtag/js?id=UA-74105917-2"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Lato:400,700,900">
 
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag('js', new Date());
-			gtag('config', 'UA-74105917-2');
-
-			$(document).ready(function() {
-
-				$(".navigation__toggle").click(function() {
-					$(".navigation__menu").toggleClass("hidden");
-				});
-
-				fetch(
-					"server/github.php",
-					{
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-						}
-					}
-				)
-				.then(response => response.json())
-				.then(data => {
-					let activeProjects = [];
-					let pendingProjects = [];
-					data.data.user.projects.nodes.forEach((x) => {
-						if (x.name.includes("[PENDING]")) {
-							pendingProjects.push(x);
-						} else {
-							activeProjects.push(x);
-						}
-					});
-					data.data.user.repositories.nodes.forEach((x) => {
-						x.projects.nodes.forEach((y) => {
-							if (y.name.includes("[PENDING]")) {
-								pendingProjects.push(y);
-							} else {
-								activeProjects.push(y);
-							}
-						});
-					});
-					activeProjects = activeProjects.map((x) => `
-						<div class="feature feature--project" id="${x.name.toLowerCase().replaceAll(/[ \.]/g, "-").replaceAll(/:/g, "")}">
-							<div class="feature__icon">
-								<div class="project__status">
-									<div class="status__percentage">${Math.round(x.progress.donePercentage)}%</div>
-									<div class="status__done" style="width:${Math.round(x.progress.donePercentage)}%"></div>
-									<div class="status__inprogress" style="width:${Math.round(x.progress.inProgressPercentage)}%"></div>
-									<div class="status__todo" style="width:${Math.round(x.progress.todoPercentage)}%"></div>
-								</div>
-							</div>
-							<div class="feature__body">
-								<div class="feature__title"><a href="#${x.name.toLowerCase().replaceAll(/[ \.]/g, "-").replaceAll(/:/g, "")}">${x.name}</a></div>
-								<div class="feature__description">${x.body}</div>
-								<ul class="feature__actions">
-									<li><a href="https://github.com/${x.resourcePath}" class="button"><i class="fab fa-fw fa-github"></i> View Project</a></li>
-								</ul>
-							</div>
-						</div>
-					`);
-					pendingProjects = pendingProjects.map((x) => `
-						<div class="pending-project"><span class="pending-project__title"><a href="https://github.com/${x.resourcePath}">${x.name.replace("[PENDING] ", "")}</a></span> <span class="pending-project__description">${x.body}</span></div>
-					`)
-					$("[data-projects='active']").html(activeProjects.join(''));
-					$("[data-projects='pending']").html(`
-						${pendingProjects.join('')}
-						<ul class="feature__actions">
-							<li><a href="https://patreon.com/giffyglyph" class="button"><i class="fab fa-fw fa-patreon"></i> Suggest other Projects</a></li>
-						</ul>
-					`);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			});
-		</script>
+		<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+		<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Lato:400,700,900">
 	</head>
 	<body>
 		<div class="page page--index">
@@ -98,16 +21,16 @@
 				<div class="navigation__bar">
 					<a href="." class="navigation__brand"><img src="./images/icon-giffyglyph.png" alt="Giffyglyph"/> Giffyglyph</a>
 					<ul class="navigation__contact">
-						<li><a href="https://ko-fi.com/giffyglyph"><i class="fas fa-fw fa-heart"></i><span>Ko-fi</span></a></li>
-						<li><a href="https://reddit.com/user/giffyglyph"><i class="fab fa-fw fa-reddit-alien"></i><span>Reddit</span></a></li>
-						<li><a href="https://twitch.tv/giffyglyph"><i class="fab fa-fw fa-twitch"></i><span>Twitch</span></a></li>
-						<li><a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg"><i class="fab fa-fw fa-youtube"></i><span>Youtube</span></a></li>
-						<li><a href="https://www.facebook.com/giffyglyph"><i class="fab fa-fw fa-facebook"></i><span>Facebook</span></a></li>
-						<li><a href="https://twitter.com/giffyglyph"><i class="fab fa-fw fa-twitter"></i><span>Twitter</span></a></li>
-						<li><a href="mailto:giffyglyph@gmail.com"><i class="fas fa-fw fa-envelope"></i><span>Email</span></a></li>
-						<li><a href="https://patreon.com/giffyglyph" class="patreon">Support on Patreon</a></li>
+						<li><a href="https://ko-fi.com/giffyglyph" aria-label="Ko-fi"><i class="fas fa-fw fa-heart"></i></a></li>
+						<li><a href="https://reddit.com/user/giffyglyph" aria-label="Reddit"><i class="fab fa-fw fa-reddit-alien"></i></a></li>
+						<li><a href="https://twitch.tv/giffyglyph" aria-label="Twitch"><i class="fab fa-fw fa-twitch"></i></a></li>
+						<li><a href="https://www.youtube.com/channel/UCplXj8GUnq1thw2bJQZRVxg" aria-label="Youtube"><i class="fab fa-fw fa-youtube"></i></a></li>
+						<li><a href="https://www.facebook.com/giffyglyph" aria-label="Facebook"><i class="fab fa-fw fa-facebook"></i></a></li>
+						<li><a href="https://twitter.com/giffyglyph" aria-label="Twitter"><i class="fab fa-fw fa-twitter"></i></a></li>
+						<li><a href="mailto:giffyglyph@gmail.com" aria-label="Email"><i class="fas fa-fw fa-envelope"></i></a></li>
+						<li><a href="https://patreon.com/giffyglyph" aria-label="Patreon" class="patreon">Support on Patreon</a></li>
 					</ul>
-					<button class="navigation__toggle"><i class="fas fa-fw fa-bars"></i></button>
+					<button class="navigation__toggle" aria-label="Navigation Menu"><i class="fas fa-fw fa-bars"></i></button>
 				</div>
 				<div class="navigation__menu hidden">
 					<ul>
@@ -150,7 +73,8 @@
 						<p><strong>Thanks for visiting!</strong></p>
 					</div>
 					<div class="introduction__twitter">
-						<a height="0" class="twitter-timeline" href="https://twitter.com/giffyglyph?ref_src=twsrc%5Etfw" data-chrome="nofooter transparent">Tweets by giffyglyph</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+						<a height="0" class="twitter-timeline" href="https://twitter.com/giffyglyph?ref_src=twsrc%5Etfw" data-chrome="nofooter transparent"></a>
+						<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 					</div>
 				</section>
 				<section class="showcase showcase--alt showcase--activity" id="activity">
@@ -214,6 +138,89 @@
 					</ul>
 				</div>
 			</footer>
+		</div>
+		<div class="scripts">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+			<script src="https://www.googletagmanager.com/gtag/js?id=UA-74105917-2"></script>
+			<script>
+				window.dataLayer = window.dataLayer || [];
+
+				function gtag() {
+					dataLayer.push(arguments);
+				}
+				gtag('js', new Date());
+				gtag('config', 'UA-74105917-2');
+
+				$(document).ready(function() {
+
+					$(".navigation__toggle").click(function() {
+						$(".navigation__menu").toggleClass("hidden");
+					});
+
+					fetch(
+						"server/github.php",
+						{
+							method: 'GET',
+							headers: {
+								'Content-Type': 'application/json',
+							}
+						}
+					)
+					.then(response => response.json())
+					.then(data => {
+						let activeProjects = [];
+						let pendingProjects = [];
+						data.data.user.projects.nodes.forEach((x) => {
+							if (x.name.includes("[PENDING]")) {
+								pendingProjects.push(x);
+							} else {
+								activeProjects.push(x);
+							}
+						});
+						data.data.user.repositories.nodes.forEach((x) => {
+							x.projects.nodes.forEach((y) => {
+								if (y.name.includes("[PENDING]")) {
+									pendingProjects.push(y);
+								} else {
+									activeProjects.push(y);
+								}
+							});
+						});
+						activeProjects = activeProjects.map((x) => `
+							<div class="feature feature--project" id="${x.name.toLowerCase().replaceAll(/[ \.]/g, "-").replaceAll(/:/g, "")}">
+								<div class="feature__icon">
+									<div class="project__status">
+										<div class="status__percentage">${Math.round(x.progress.donePercentage)}%</div>
+										<div class="status__done" style="width:${Math.round(x.progress.donePercentage)}%"></div>
+										<div class="status__inprogress" style="width:${Math.round(x.progress.inProgressPercentage)}%"></div>
+										<div class="status__todo" style="width:${Math.round(x.progress.todoPercentage)}%"></div>
+									</div>
+								</div>
+								<div class="feature__body">
+									<div class="feature__title"><a href="#${x.name.toLowerCase().replaceAll(/[ \.]/g, "-").replaceAll(/:/g, "")}">${x.name}</a></div>
+									<div class="feature__description">${x.body}</div>
+									<ul class="feature__actions">
+										<li><a href="https://github.com/${x.resourcePath}" class="button"><i class="fab fa-fw fa-github"></i> View Project</a></li>
+									</ul>
+								</div>
+							</div>
+						`);
+						pendingProjects = pendingProjects.map((x) => `
+							<div class="pending-project"><span class="pending-project__title"><a href="https://github.com/${x.resourcePath}">${x.name.replace("[PENDING] ", "")}</a></span> <span class="pending-project__description">${x.body}</span></div>
+						`)
+						$("[data-projects='active']").html(activeProjects.join(''));
+						$("[data-projects='pending']").html(`
+							${pendingProjects.join('')}
+							<ul class="feature__actions">
+								<li><a href="https://patreon.com/giffyglyph" class="button"><i class="fab fa-fw fa-patreon"></i> Suggest other Projects</a></li>
+							</ul>
+						`);
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+				});
+			</script>
 		</div>
 	</body>
 </html>
