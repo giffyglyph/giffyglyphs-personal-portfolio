@@ -1,8 +1,8 @@
-DirectoryIndex index.html
-Redirect 301 /darkerdungeons /#giffyglyphs-darker-dungeons
-Redirect 301 /darkerdungeons/roll20 /#roll20-5e-darker-dungeons
-Redirect 301 /monstermaker /#giffyglyphs-monster-maker
-Redirect 301 /cardcodex /#giffyglyphs-card-codex
-Redirect 301 /classcompendium /#giffyglyphs-class-compendium
-Redirect 301 /grandgrimoire /
-Redirect 301 /timetracker /
+RedirectMatch 301 /darkerdungeons/$ /#giffyglyphs-darker-dungeons
+RedirectMatch 301 /darkerdungeons/roll20$ /#roll20-5e-darker-dungeons
+RedirectMatch 301 /monstermaker$ /#giffyglyphs-monster-maker
+RedirectMatch 301 /cardcodex$ /#giffyglyphs-card-codex
+RedirectMatch 301 /classcompendium$ /#giffyglyphs-class-compendium
+RedirectMatch 301 /quickquest$ /#giffyglyphs-quick-quest
+RedirectMatch 301 /grandgrimoire$ /
+RedirectMatch 301 /timetracker$ /
